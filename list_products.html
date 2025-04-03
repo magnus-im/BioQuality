@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Produtos</title>
+</head>
+<body>
+    <h1>Produtos Cadastrados</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome Comercial</th>
+            <th>Fabricante</th>
+            <th>Ações</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product[0] }}</td>
+            <td>{{ product[1] }}</td>
+            <td>{{ product[2] }}</td>
+            <td>
+                <a href="/add_characteristic/{{ product[0] }}">Adicionar Característica</a> |
+                <a href="/view_characteristics/{{ product[0] }}">Ver Características</a> |
+                <form method="POST" action="/delete_product/{{ product[0] }}" style="display:inline;">
+                    <input type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja excluir este produto?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Voltar</a>
+</body>
+</html>

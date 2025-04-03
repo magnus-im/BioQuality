@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar Produto</title>
+</head>
+<body>
+    <h1>Adicionar Produto</h1>
+    <form method="POST">
+        <label>Fabricante:</label>
+        <select name="manufacturer_id" required>
+            {% for manufacturer in manufacturers %}
+            <option value="{{ manufacturer[0] }}">{{ manufacturer[1] }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Nome Comercial:</label><input type="text" name="commercial_name" required><br>
+        <label>Nome Técnico:</label><input type="text" name="technical_name"><br>
+        <label>Contra-Tipo:</label><input type="text" name="counter_type"><br>
+        <label>Descrição:</label><textarea name="description"></textarea><br>
+        <label>Sinônimos (segure Ctrl para múltiplos):</label><br>
+        <select name="synonym_ids" multiple>
+            {% for product in products %}
+            <option value="{{ product[0] }}">{{ product[1] }}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit" value="Salvar">
+    </form>
+    <a href="/">Voltar</a>
+</body>
+</html>

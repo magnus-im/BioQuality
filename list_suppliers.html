@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Fornecedores</title>
+</head>
+<body>
+    <h1>Fornecedores Cadastrados</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Contato</th>
+            <th>Ação</th>
+        </tr>
+        {% for supplier in suppliers %}
+        <tr>
+            <td>{{ supplier[0] }}</td>
+            <td>{{ supplier[1] }}</td>
+            <td>{{ supplier[2] }}</td>
+            <td>
+                <form method="POST" action="/delete_supplier/{{ supplier[0] }}" style="display:inline;">
+                    <input type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja excluir este fornecedor?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Voltar</a>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Clientes</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Clientes Cadastrados</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Endereço</th>
+            <th>Ações</th>
+        </tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client[0] }}</td>
+            <td>{{ client[1] }}</td>
+            <td>{{ client[2] }}</td>
+            <td>{{ client[3] }}</td>
+            <td>
+                <form method="POST" action="/delete_client/{{ client[0] }}" style="display:inline;">
+                    <input type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja excluir este cliente?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/add_client">Adicionar Cliente</a> | <a href="/">Voltar</a>
+</body>
+</html>

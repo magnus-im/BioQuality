@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar Boletim</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        function updateCharacteristics() {
+            var productId = document.getElementById('product_id').value;
+            window.location.href = '/add_bulletin?product_id=' + productId;
+        }
+        function addNewCharacteristic() {
+            var container = document.getElementById('new_characteristics');
+            var div = document.createElement('div');
+            div.className = 'new-char-row';  // Adicionando classe para estilização
+            div.innerHTML = `
+                <label>Nome:</label><input type="text" name="new_char_name[]">
+                <label>Unidade:</label><input type="text" name="new_char_unit[]">
+                <label>Valor Mínimo:</label><input type="number" step="0.01" name="new_char_min_value[]">
+                <label>Valor Máximo:</label><input type="number" step="0.01" name="new_char_max_value[]">
+                <label>Valor Obtido:</label><input type="number" step="0.01" name="new_char_value[]">
+                <hr>
+            `;
+            container.appendChild(div);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Adicionar Boletim</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="section">
+                <label>Tipo de Entrada:</label>
+                <select name="entry_type" required>
+                    <option value="">-- Selecione --</option>  <!-- Opção vazia -->
+                    <option value="Importação">Importação</option>
+                    <option value="Nacional">Nacional</option>
+                </select>
+                <label>Invoice/PDC:</label><input type="text" name="invoice_pdc" required>
+                <label>Fornecedor:</label>
+                <select name="supplier_id" required>
+                    <option value="">-- Selecione --</option>  <!-- Opção vazia -->
+                    {% for supplier in suppliers %}
+                    <option value="{{ supplier[0] }}">{{ supplier[1] }}</option>
+                    {% endfor %}
+                </select>
+                <label>Nº Nota Fiscal:</label><input type="text" name="invoice_number" required>
+            </div>
+
+            <div class="section">
+                <label>Lote do Fornecedor:</label><input type="text" name="supplier_lot" required>
+                <label>Data de Fabricação:</label><input type="date" name="manufacturing_date" required>
+                <label>Data de Validade:</label><input type="date" name="expiration_date" required>
+                <label>Unidade de Medida:</label><input type="text" name="unit_measure" required>
+                <label>Quantidade:</label><input type="number" step="0.01" name="quantity" required>
+                <label>Embalagem:</label><input type="text" name="packaging" required>
+                <label>Fator de Conversão:</label><input type="number" step="0.01" name="conversion_factor">
+                <label>Cód. Interno ERP:</label><input type="text" name="erp_code">
+                <label>Lote Interno:</label><input type="text" name="internal_lot">
+            </div>
+
+            <div class="section">
+                <label>Produto:</label>
+                <select name="product_id" id="product_id" onchange="updateCharacteristics()" required>
+                    <option value="">-- Selecione --</option>  <!-- Opção vazia -->
+                    {% for product in products %}
+                    <option value="{{ product[0] }}" {% if product[0] == product_id %}selected{% endif %}>{{ product[1] }}</option>
+                    {% endfor %}
+                </select>
+                <label>PDF do Laudo:</label><input type="file" name="pdf_file" accept=".pdf">
+            </div>
+
+            <div class="section">
+                <h3>Características Existentes</h3>
+                {% if characteristics %}
+                {% for char in characteristics %}
+                <label>{{ char[1] }} ({{ char[2] }}):</label>
+                <input type="hidden" name="characteristic_ids" value="{{ char[0] }}">
+                <input type="number" step="0.01" name="value_{{ char[0] }}" placeholder="Min: {{ char[3] }} - Max: {{ char[4] }}">
+                {% endfor %}
+                {% else %}
+                <p>Nenhuma característica cadastrada para este produto.</p>
+                {% endif %}
+            </div>
+
+            <div class="section">
+                <h3>Adicionar Novas Características</h3>
+                <div id="new_characteristics"></div>
+                <button type="button" onclick="addNewCharacteristic()">Adicionar Nova Característica</button>
+            </div>
+
+            <button type="submit">Salvar</button>
+        </form>
+        <a class="back-link" href="/">Voltar</a>
+    </div>
+</body>
+</html>

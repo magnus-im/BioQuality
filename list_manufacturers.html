@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Fabricantes</title>
+</head>
+<body>
+    <h1>Fabricantes Cadastrados</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ação</th>
+        </tr>
+        {% for manufacturer in manufacturers %}
+        <tr>
+            <td>{{ manufacturer[0] }}</td>
+            <td>{{ manufacturer[1] }}</td>
+            <td>
+                <form method="POST" action="/delete_manufacturer/{{ manufacturer[0] }}" style="display:inline;">
+                    <input type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja excluir este fabricante?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Voltar</a>
+</body>
+</html>

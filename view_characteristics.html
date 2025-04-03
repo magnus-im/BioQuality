@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Características do Produto - {{ product_name }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Características do Produto: {{ product_name }}</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Unidade</th>
+            <th>Valor Mínimo</th>
+            <th>Valor Máximo</th>
+            <th>Método</th>
+            <th>Ações</th>
+        </tr>
+        {% for char in characteristics %}
+        <tr>
+            <td>{{ char[0] }}</td>
+            <td>{{ char[1] }}</td>
+            <td>{{ char[2] }}</td>
+            <td>{{ char[3] }}</td>
+            <td>{{ char[4] }}</td>
+            <td>{{ char[5] }}</td>
+            <td>
+                <a href="/edit_characteristic/{{ char[0] }}">Editar</a> |
+                <form method="POST" action="/delete_characteristic/{{ char[0] }}" style="display:inline;">
+                    <input type="hidden" name="product_id" value="{{ product_id }}">
+                    <input type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja excluir esta característica?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/add_characteristic/{{ product_id }}">Adicionar Nova Característica</a> |
+    <a href="/list_products">Voltar</a>
+</body>
+</html>

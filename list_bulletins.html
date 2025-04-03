@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Boletins</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Boletins Cadastrados</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Lote Fornecedor</th>
+            <th>Lote Interno</th>
+            <th>Produto</th>
+            <th>Fornecedor</th>
+            <th>Tipo Entrada</th>
+            <th>Invoice/PDC</th>
+            <th>Data Recebimento</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+        {% for bulletin in bulletins %}
+        <tr>
+            <td>{{ bulletin[0] }}</td>
+            <td>{{ bulletin[1] }}</td>
+            <td>{{ bulletin[2] }}</td>
+            <td>{{ bulletin[3] }}</td>
+            <td>{{ bulletin[4] }}</td>
+            <td>{{ bulletin[5] }}</td>
+            <td>{{ bulletin[6] }}</td>
+            <td>{{ bulletin[7] }}</td>
+            <td>{{ bulletin[8] }}</td>
+            <td>
+                <a href="/generate_certificate/{{ bulletin[0] }}">Certificado Personalizado</a> |
+                <a href="/generate_original_certificate/{{ bulletin[0] }}">Certificado Original</a> |
+                {% if bulletin[9] %}
+                <a href="/uploads/{{ bulletin[9]|basename }}" target="_blank">Ver PDF</a> |
+                {% endif %}
+                <form method="POST" action="/delete_bulletin/{{ bulletin[0] }}" style="display:inline;">
+                    <input type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja excluir este boletim?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Voltar</a>
+</body>
+</html>

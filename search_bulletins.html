@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscar Boletins</title>
+</head>
+<body>
+    <h1>Buscar Boletins</h1>
+    <form method="POST">
+        <label>Fornecedor:</label>
+        <select name="supplier_id">
+            <option value="">Todos</option>
+            {% for supplier in suppliers %}
+            <option value="{{ supplier[0] }}">{{ supplier[1] }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Fabricante:</label>
+        <select name="manufacturer_id">
+            <option value="">Todos</option>
+            {% for manufacturer in manufacturers %}
+            <option value="{{ manufacturer[0] }}">{{ manufacturer[1] }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Invoice/PDC:</label><input type="text" name="invoice_pdc"><br>
+        <label>Nº Nota Fiscal:</label><input type="text" name="invoice_number"><br>
+        <input type="submit" value="Buscar">
+    </form>
+
+    {% if bulletins %}
+    <h2>Resultados</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Lote Fornecedor</th>
+            <th>Lote Interno</th>
+            <th>Produto</th>
+            <th>Fornecedor</th>
+            <th>Fabricante</th>
+            <th>Tipo Entrada</th>
+            <th>Invoice/PDC</th>
+            <th>Nº Nota Fiscal</th>
+            <th>Data Receb.</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+        {% for bulletin in bulletins %}
+        <tr>
+            <td>{{ bulletin[0] }}</td>
+            <td>{{ bulletin[1] }}</td>
+            <td>{{ bulletin[2] }}</td>
+            <td>{{ bulletin[3] }}</td>
+            <td>{{ bulletin[4] }}</td>
+            <td>{{ bulletin[10] }}</td>
+            <td>{{ bulletin[5] }}</td>
+            <td>{{ bulletin[6] }}</td>
+            <td>{{ bulletin[9] }}</td>
+            <td>{{ bulletin[7] }}</td>
+            <td>{{ bulletin[8] }}</td>
+            <td>
+                <a href="/generate_certificate/{{ bulletin[0] }}">Gerar Certificado</a> |
+                <form method="POST" action="/delete_bulletin/{{ bulletin[0] }}" style="display:inline;">
+                    <input type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja excluir este boletim?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <a href="/">Voltar</a>
+</body>
+</html>

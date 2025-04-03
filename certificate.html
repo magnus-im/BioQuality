@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certificado de Qualidade</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Certificado de Qualidade</h1>
+    <p><strong>Emissor:</strong> {{ certificate.emitter }}</p>
+    <p><strong>Cliente:</strong> {{ certificate.client_name }}</p>
+    <p><strong>Produto:</strong> {{ certificate.product }}</p>
+    <p><strong>Nº Invoice:</strong> {{ certificate.invoice_number }}</p>
+    <p><strong>Data de Emissão:</strong> {{ certificate.issue_date }}</p>
+    <p><strong>Quantidade Vendida:</strong> {{ certificate.quantity_sold }}</p>
+    <p><strong>Data de Fabricação:</strong> {{ certificate.manufacturing_date }}</p>
+    <p><strong>Data de Validade:</strong> {{ certificate.expiration_date }}</p>
+
+    <h2>Características</h2>
+    <table>
+        <tr>
+            <th>Característica</th>
+            <th>Unidade</th>
+            <th>Valor Mínimo</th>
+            <th>Valor Máximo</th>
+            <th>Valor Obtido</th>
+            <th>Método</th>
+            <th>Status</th>
+        </tr>
+        {% for char in certificate.characteristics %}
+        <tr>
+            <td>{{ char.name }}</td>
+            <td>{{ char.unit }}</td>
+            <td>{{ char.min }}</td>
+            <td>{{ char.max }}</td>
+            <td>{{ char.value }}</td>
+            <td>{{ char.method }}</td>
+            <td>{{ char.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/list_bulletins">Voltar</a>
+</body>
+</html>

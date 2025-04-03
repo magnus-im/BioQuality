@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Característica</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Editar Característica</h1>
+    <form method="POST">
+        <label>Nome:</label><input type="text" name="name" value="{{ characteristic[1] }}" required><br>
+        <label>Unidade:</label><input type="text" name="unit" value="{{ characteristic[2] }}"><br>
+        <label>Valor Mínimo:</label><input type="number" step="0.01" name="min_value" value="{{ characteristic[3] }}"><br>
+        <label>Valor Máximo:</label><input type="number" step="0.01" name="max_value" value="{{ characteristic[4] }}"><br>
+        <label>Método de Análise:</label><input type="text" name="method" value="{{ characteristic[5] }}"><br>
+        <input type="submit" value="Salvar">
+    </form>
+    <a href="/view_characteristics/{{ characteristic[6] }}">Voltar</a>
+</body>
+</html>

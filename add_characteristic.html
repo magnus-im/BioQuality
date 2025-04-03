@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar Característica</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Adicionar Característica ao Produto</h1>
+    <form method="POST">
+        <label>Nome (ex.: Pureza):</label><input type="text" name="name" required><br>
+        <label>Unidade (ex.: %):</label><input type="text" name="unit"><br>
+        <label>Valor Mínimo:</label><input type="number" step="0.01" name="min_value"><br>
+        <label>Valor Máximo:</label><input type="number" step="0.01" name="max_value"><br>
+        <label>Método de Análise:</label><input type="text" name="method"><br>
+        <input type="submit" value="Salvar">
+    </form>
+    <a href="/list_products">Voltar</a>
+</body>
+</html>

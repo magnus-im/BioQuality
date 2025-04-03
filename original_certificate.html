@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certificado Original</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Certificado de Análise - Original</h1>
+    <p><strong>Emissor:</strong> {{ certificate.emitter }}</p>
+    <p><strong>Fornecedor:</strong> {{ certificate.supplier_name }}</p>
+    <p><strong>Produto:</strong> {{ certificate.product }}</p>
+    <p><strong>Nº Invoice:</strong> {{ certificate.invoice_number }}</p>
+    <p><strong>Data de Emissão:</strong> {{ certificate.issue_date }}</p>
+    <p><strong>Quantidade:</strong> {{ certificate.quantity }} {{ certificate.unit_measure }}</p>
+    <p><strong>Lote Fornecedor:</strong> {{ certificate.supplier_lot }}</p>
+    <p><strong>Lote Interno:</strong> {{ certificate.internal_lot }}</p>
+    <p><strong>Data de Fabricação:</strong> {{ certificate.manufacturing_date }}</p>
+    <p><strong>Data de Validade:</strong> {{ certificate.expiration_date }}</p>
+
+    <h2>Características</h2>
+    <table>
+        <tr>
+            <th>Característica</th>
+            <th>Unidade</th>
+            <th>Valor Mínimo</th>
+            <th>Valor Máximo</th>
+            <th>Valor Obtido</th>
+            <th>Método</th>
+        </tr>
+        {% for char in certificate.characteristics %}
+        <tr>
+            <td>{{ char.name }}</td>
+            <td>{{ char.unit }}</td>
+            <td>{{ char.min }}</td>
+            <td>{{ char.max }}</td>
+            <td>{{ char.value }}</td>
+            <td>{{ char.method }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/list_bulletins">Voltar</a>
+</body>
+</html>

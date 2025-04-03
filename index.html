@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boletins Técnicos</title>
+</head>
+<body>
+    <h1>Boletins Técnicos</h1>
+    <h3>Cadastrar</h3>
+    <a href="/add_manufacturer">Adicionar Fabricante</a> | 
+    <a href="/add_product">Adicionar Produto</a> | 
+    <a href="/add_supplier">Adicionar Fornecedor</a> | 
+    <a href="/add_bulletin">Adicionar Boletim</a>
+    <h3>Consultar</h3>
+    <a href="/list_manufacturers">Listar Fabricantes</a> | 
+    <a href="/list_products">Listar Produtos</a> | 
+    <a href="/list_suppliers">Listar Fornecedores</a> | 
+    <a href="/list_bulletins">Listar Boletins</a> | 
+    <a href="/search_bulletins">Buscar Boletins</a>
+    <h2>Lista de Boletins</h2>
+    <table border="1">
+        <tr>
+            <th>Lote Fornecedor</th>
+            <th>Lote Interno</th>
+            <th>Produto</th>
+            <th>Fornecedor</th>
+            <th>Tipo Entrada</th>
+            <th>Invoice/PDC</th>
+            <th>Data Receb.</th>
+            <th>Status</th>
+        </tr>
+        {% for bulletin in bulletins %}
+        <tr>
+            <td>{{ bulletin[4] }}</td>
+            <td>{{ bulletin[12] }}</td>
+            <td>{{ bulletin[18] }}</td>
+            <td>{{ bulletin[19] }}</td>
+            <td>{{ bulletin[1] }}</td>
+            <td>{{ bulletin[2] }}</td>
+            <td>{{ bulletin[14] }}</td>
+            <td>{{ bulletin[17] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
